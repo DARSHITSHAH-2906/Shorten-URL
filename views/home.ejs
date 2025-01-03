@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            background-color: bisque;
+        }
+        #title{
+            font-size: 70px;
+            color: darkred;
+            text-align: center;
+        }
+        .form1{
+            padding: 10px;
+            text-align: center;
+            color:darkred;
+        }
+        #inputtext{
+            color: darkred;
+            width: 30%;
+            height: 2rem;
+            font-size: 1rem;
+        }
+        #label1{
+            vertical-align: bottom;
+            font-size: 2rem;
+        }
+
+        #submitbtn{
+            border: 0px ;
+            border-radius: 10px;
+            width: 15%;
+            height: 2rem;
+            font-size: 1rem;
+            background-color:darkolivegreen;
+            color: blanchedalmond;
+        }
+        #submitbtn:hover{
+            background-color: blanchedalmond;
+            border: 1px solid darkolivegreen;
+            color: darkolivegreen;
+            
+        }
+        p{
+            text-align: center;
+            color: darkred;
+            font-size: 2rem;
+        }
+        
+        
+        table {
+            margin: 10px auto ;
+            border-collapse: collapse;
+            width: 90vw;
+        }
+        th, td {
+        border: 2px dashed darkred;
+        padding: 8px;
+        }
+        th {
+        border-bottom: 4px solid darkred;
+        }
+        td {
+            text-align: center;
+        border-right: 2px dotted darkred;
+        }
+        a{
+            text-decoration: none;
+        }
+        .delandanalytics{
+            border: 0px;
+            border-radius: 10px;
+            width: 50;
+            height: 2rem;
+            font-size: 20px;
+            background-color:darkolivegreen;
+            color: blanchedalmond;
+        }
+        .delandanalytics:hover{
+            background-color: blanchedalmond;
+            border: 1px solid darkolivegreen;
+            color: darkolivegreen;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">Url Shortner</h1>
+    <% if (locals.id) { %>
+        <p>URL Generated : http://localhost:3000/url/<%= id %></p>
+    <% } %>
+
+    <% if (locals.deletedid) { %>
+        <p> <%= deletedid %> ID Deleted Sucessfully</p>
+    <% } %>
+
+    <form class="form1" action="/url" method="post" >
+        <label id="label1">Enter the url:</label>
+        <input id="inputtext",
+        type="text" , name="url" , placeholder="https://example.com" >
+        <button id="submitbtn" type="submit">Generate</button>
+    </form>
+
+    <!-- <form action="/url/analytics" method="get">
+        <button class="analyticsbtn" type="submit">Get The Analytics</button>
+    </form>
+     -->
+    
+    <% if (locals.urls) { %>
+     <table>
+        <thead>
+            <th>Sr.no</th>
+            <th>Short URL</th>
+            <th>Redirecting Url</th>
+            <th>Visited</th>
+            <th>Delete</th>
+            <th>Analytics</th>
+        </thead>
+        <tbody>
+            <% urls.forEach((url,index) => { %>
+             <tr>
+                <td><%= index+1  %></td>
+                <td><a href="http://localhost:3000/url/<%= url.shortenurl %>" target="_blank">http://localhost:3000/url/<%= url.shortenurl %></a></td>
+                <td><%= url.redirecturl %></td>
+                <td><%= url.visitcount %></td>
+                <td>
+                    <form action="/url/<%= url.shortenurl %>" method="POST" >
+                        <button type="submit" class="delandanalytics">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/url/analytics/<%= url.shortenurl %>" method="get" >
+                        <button type="submit" class="delandanalytics">Analytics</button>
+                    </form>
+                </td>
+             </tr>
+            <% }) %>
+        </tbody>
+     </table>
+    <% } %>
+</body>
+</html>
