@@ -36,9 +36,9 @@ async function RedirecttoURL(req , res){
 
     originalurl.visitcount+=1;
     originalurl.visithistory.push({
-        timestamp : Date.now.toString(),
-        ipaddress : req.ip,
-    })
+        timestamp : Date.now(),
+        ipaddress : req.ip
+    });
 
     await originalurl.save();
 
@@ -56,7 +56,7 @@ async function DeleteURL(req , res){
     if(result.deletedCount===0){
         return res.status(404).json({error : "No such short url found"})
     }
-    const allurls = await url.find({});
+
     res.status(201).redirect("/" );
 }
 
