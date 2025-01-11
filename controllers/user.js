@@ -23,16 +23,20 @@ async function LoginUser(req , res){
         return res.redirect("/login")
     }
     
-    // const sessionId = uuid();
-    // setuserid(sessionId , loginuser);
     const token = setuserid(loginuser);
 
     res.cookie("uid" , token)
 
-    return res.render("home");
+    return res.redirect("/");
+}
+
+async function LogoutUser(req, res) {
+    res.clearCookie("uid");
+    return res.redirect("/");
 }
 
 module.exports = {
     SignupUser,
-    LoginUser
+    LoginUser,
+    LogoutUser
 }

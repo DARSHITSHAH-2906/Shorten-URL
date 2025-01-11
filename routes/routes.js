@@ -15,8 +15,8 @@ router.get('/analytics/:id' ,GetAnalytics )
 
 router2.get('/' , async (req ,res)=>{
     if(!req.user){
-        console.log(`hi`);
-        return res.redirect("/login");
+        // console.log(`hi`);
+        return res.render("home");
     }
     const allurls = await url.find({createdby : req.user._id}); 
     return res.render("home" ,{

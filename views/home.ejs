@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
+    <form action="/user/logout" method="post">
+        <button id="logoutbtn" type="submit">Log out</button>
+    </form>
     <h1 id="title">URL SHORTNER</h1>
     <% if (locals.id) { %>
         <p>URL Generated : http://localhost:3000/url/<%= id %></p>
