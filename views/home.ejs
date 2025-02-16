@@ -7,9 +7,17 @@
     <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
-    <form action="/user/logout" method="post">
-        <button id="logoutbtn" type="submit">Log out</button>
-    </form>
+    <% if(locals.id!=""){ %>
+        <form action="/user/logout" method="post">
+            <button id="logoutbtn" type="submit">Log out</button>
+        </form>
+    <% } %>
+    <% if(locals.id==""){ %>
+        <form action="/user/login" method="post">
+            <button id="loginbtn" type="submit">Log in</button>
+        </form>
+    <% } %>
+    
     <h1 id="title">URL SHORTNER</h1>
     <% if (locals.id) { %>
         <p>URL Generated : http://localhost:3000/url/<%= id %></p>
@@ -41,7 +49,7 @@
             <% urls.forEach((url,index) => { %>
              <tr>
                 <td><%= index+1  %></td>
-                <td><a href="http://localhost:3000/url/<%= url.shortenurl %>" target="_blank">url/<%= url.shortenurl %></a></td>
+                <td><a href="http://localhost:3000/url/<%= url.shortenurl %>" target="_blank">short-url/<%= url.shortenurl %></a></td>
                 <td><%= url.redirecturl %></td>
                 <td><%= url.visitcount %></td>
                 <td>

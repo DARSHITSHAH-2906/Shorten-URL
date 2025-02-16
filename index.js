@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require("path")
 const cookieparser = require("cookie-parser")
+require('dotenv').config();
 
 const {ConnecttoDB} = require('./connect')
 
@@ -9,8 +10,8 @@ const {userrouter} = require('./routes/user')
 const {allowloginuser  ,authuser} = require('./middlewares')
 
 const app = express();
-const PORT = 3000;
-ConnecttoDB("mongodb://127.0.0.1:27017/short-url");
+// const PORT = 3000;
+ConnecttoDB();
 
 //Setting up engine
 app.set("view engine" , "ejs")
@@ -28,5 +29,5 @@ app.use('/url' ,allowloginuser,router)
 app.use('/' ,authuser, router2)
 app.use('/user', userrouter);
 
-app.listen(PORT , ()=> console.log(`Server started at ${PORT}`)
+app.listen(process.env.PORT , ()=> console.log(`Server started at ${process.env.PORT}`)
 )

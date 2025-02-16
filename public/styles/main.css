@@ -17,7 +17,7 @@ body {
 }
 
 /* Logout button */
-#logoutbtn {
+#logoutbtn , #loginbtn {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -32,7 +32,7 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-#logoutbtn:hover {
+#logoutbtn:hover , #loginbtn:hover {
     background-color: #ff3b3b;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.5);
 }

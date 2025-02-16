@@ -5,13 +5,16 @@ const {setuserid , getuserid} = require('../service/auth')
 async function SignupUser(req , res){
     const {name , email , password} = req.body;
 
-    await user.create({
+    const newuser = await user.create({
         name : name,
         email : email,
         password :password
     })
 
-    
+    const token = setuserid(newuser);
+
+    res.cookie("uid" , token)
+
     return res.redirect("/");
 }
 
