@@ -13,11 +13,11 @@
         </form>
     <% } %>
     <% if(locals.id==""){ %>
-        <form action="/user/login" method="post">
+        <form action="/login" method="get">
             <button id="loginbtn" type="submit">Log in</button>
         </form>
     <% } %>
-    
+
     <h1 id="title">URL SHORTNER</h1>
     <% if (locals.id) { %>
         <p>URL Generated : http://localhost:3000/url/<%= id %></p>
